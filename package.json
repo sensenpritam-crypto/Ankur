@@ -1,0 +1,16 @@
+{
+    "name": "ankur-website",
+    "version": "1.0.0",
+    "description": "A modern responsive website",
+    "main": "index.html",
+    "scripts": {
+      "start": "live-server",
+      "dev": "live-server"
+    },
+    "keywords": ["html", "css", "javascript"],
+    "author": "Ankur Majumder",
+    "license": "MIT",
+    "devDependencies": {
+      "live-server": "^1.2.2"
+    }
+  }

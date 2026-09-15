@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Modern Website</title>
+  <title>Ankur Majumder | Portfolio & Projects</title>
   <style>
-    /* ================= CSS VARIABLES & RESET ================= */
     :root {
       --primary: #4f46e5;
       --primary-hover: #4338ca;
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
       --radius: 12px;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     }
 
     * {
@@ -25,30 +23,25 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
     .container {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* ================= HEADER & NAV ================= */
     header {
-      background: var(--surface);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      z-index: 100;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
 
     nav {
@@ -61,7 +54,8 @@
     .logo {
       font-weight: 700;
       font-size: 1.25rem;
-      color: var(--primary);
+      color: var(--text);
+      text-decoration: none;
     }
 
     .nav-links {
@@ -70,24 +64,34 @@
       list-style: none;
     }
 
-    .nav-links a:hover {
-      color: var(--primary);
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    /* ================= HERO SECTION ================= */
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Hero */
     .hero {
+      padding: 6rem 0 4rem;
       text-align: center;
-      padding: 5rem 1rem 4rem;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero span {
+      color: var(--primary);
     }
 
     .hero p {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--text-muted);
       max-width: 600px;
       margin: 0 auto 2rem;
@@ -97,12 +101,13 @@
       display: inline-block;
       background-color: var(--primary);
       color: #fff;
-      padding: 0.8rem 1.8rem;
+      padding: 0.8rem 2rem;
       border-radius: 9999px;
       font-weight: 600;
+      text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.1s ease;
+      transition: all 0.2s ease;
     }
 
     .btn:hover {
@@ -110,42 +115,43 @@
       transform: translateY(-2px);
     }
 
-    /* ================= FEATURES SECTION ================= */
-    .features {
-      padding: 4rem 0;
-    }
-
+    /* Projects Grid */
     .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-title h2 {
       font-size: 2rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      gap: 1.5rem;
+      margin-bottom: 5rem;
     }
 
     .card {
-      background: var(--surface);
-      padding: 2rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background-color: var(--surface);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+    .card-tag {
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.05em;
     }
 
     .card h3 {
-      margin-bottom: 0.5rem;
+      margin: 0.5rem 0;
     }
 
     .card p {
@@ -153,53 +159,26 @@
       font-size: 0.95rem;
     }
 
-    /* ================= CONTACT SECTION ================= */
-    .contact {
-      background: var(--surface);
-      padding: 4rem 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .contact-form {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      gap: 0.4rem;
-    }
-
-    .form-group label {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      padding: 0.75rem;
+    /* Contact */
+    .contact-box {
+      background-color: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 1rem;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: 2px solid var(--primary);
-      border-color: transparent;
-    }
-
-    /* ================= FOOTER ================= */
-    footer {
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 500px;
+      margin: 0 auto 5rem;
       text-align: center;
-      padding: 2rem;
+    }
+
+    .contact-box p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
       color: var(--text-muted);
       font-size: 0.9rem;
     }
@@ -207,94 +186,60 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="container">
       <nav>
-        <a href="#" class="logo">BrandName.</a>
+        <a href="#" class="logo">AM.</a>
         <ul class="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero container">
-      <h1>Build something amazing today</h1>
-      <p>A fast, responsive, and customizable HTML template designed to help you start your next web project in minutes.</p>
-      <a href="#contact" class="btn">Get Started</a>
+  <main class="container">
+    <section class="hero">
+      <h1>Hi, I'm <span>Ankur Majumder</span></h1>
+      <p>Welcome to my personal website. I build web applications and digital experiences using clean code and modern web standards.</p>
+      <a href="#contact" class="btn">Get in Touch</a>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features" class="features container">
-      <div class="section-title">
-        <h2>Why Choose Us</h2>
-        <p style="color: var(--text-muted);">Everything you need to kickstart your presence online.</p>
-      </div>
+    <section id="projects">
+      <h2 class="section-title">Featured Projects</h2>
       <div class="grid">
         <div class="card">
-          <div class="card-icon">⚡</div>
-          <h3>Lightning Fast</h3>
-          <p>Built with clean, lightweight semantic HTML and pure CSS without unnecessary bloat.</p>
+          <div class="card-tag">Web Development</div>
+          <h3>Modern Web App</h3>
+          <p>A fast, responsive web interface built using semantic HTML5, CSS Grid, and JavaScript.</p>
         </div>
         <div class="card">
-          <div class="card-icon">📱</div>
-          <h3>Fully Responsive</h3>
-          <p>Looks great on any screen size—from mobile phones and tablets to desktop monitors.</p>
+          <div class="card-tag">Backend / Node</div>
+          <h3>REST API Service</h3>
+          <p>Scalable backend architecture configured with Node.js and modular package management.</p>
         </div>
         <div class="card">
-          <div class="card-icon">🎨</div>
-          <h3>Easy to Customize</h3>
-          <p>Tweak colors, typography, layout, and content quickly using straightforward CSS variables.</p>
+          <div class="card-tag">UI / UX</div>
+          <h3>Interactive Dashboard</h3>
+          <p>Data visualization dashboard designed for maximum readability and speed.</p>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="section-title">
-          <h2>Get in Touch</h2>
-          <p style="color: var(--text-muted);">Send us a message and we'll get back to you shortly.</p>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" required placeholder="Jane Doe" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" required placeholder="jane@example.com" />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" rows="4" required placeholder="Write your message here..."></textarea>
-          </div>
-          <button type="submit" class="btn">Send Message</button>
-        </form>
+    <section id="contact">
+      <div class="contact-box">
+        <h2>Let's Connect</h2>
+        <p>Feel free to reach out for collaborations, project ideas, or any questions.</p>
+        <button class="btn" onclick="alert('Thanks for reaching out! You can update this action in index.html.')">Say Hello 👋</button>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 BrandName. All rights reserved.</p>
+      <p>&copy; 2026 Ankur Majumder. Built with HTML & npm.</p>
     </div>
   </footer>
 
-  <!-- SCRIPT -->
-  <script>
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const name = document.getElementById("name").value;
-      alert(`Thank you, ${name}! Your message has been sent successfully.`);
-      this.reset();
-    });
-  </script>
 </body>
 </html>
