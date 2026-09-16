@@ -1,245 +1,443 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ankur  | Portfolio & Projects</title>
+  <title>ApexStudio | Digital Products & Engineering</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    :root {
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --bg: #0f172a;
-      --surface: #1e293b;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: #334155;
-      --radius: 12px;
+    /* Custom transition styles */
+    .toast-enter {
+      transform: translateY(0);
+      opacity: 1;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background-color: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 10;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    /* Hero */
-    .hero {
-      padding: 6rem 0 4rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero span {
-      color: var(--primary);
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: var(--primary);
-      color: #fff;
-      padding: 0.8rem 2rem;
-      border-radius: 9999px;
-      font-weight: 600;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-hover);
-      transform: translateY(-2px);
-    }
-
-    /* Projects Grid */
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 5rem;
-    }
-
-    .card {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-    }
-
-    .card-tag {
-      font-size: 0.8rem;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: 0.05em;
-    }
-
-    .card h3 {
-      margin: 0.5rem 0;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* Contact */
-    .contact-box {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-      max-width: 500px;
-      margin: 0 auto 5rem;
-      text-align: center;
-    }
-
-    .contact-box p {
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
+    .toast-exit {
+      transform: translateY(1rem);
+      opacity: 0;
     }
   </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
 
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#" class="logo">AM.</a>
-        <ul class="nav-links">
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 text-xl font-black tracking-tight text-brand-600 dark:text-brand-500">
+        <i data-lucide="sparkles" class="w-6 h-6"></i>
+        <span>ApexStudio</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#features" class="hover:text-brand-600 transition-colors">Features</a>
+        <a href="#work" class="hover:text-brand-600 transition-colors">Work</a>
+        <a href="#pricing" class="hover:text-brand-600 transition-colors">Pricing</a>
+        <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
       </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
+          <i data-lucide="moon" id="themeIcon" class="w-5 h-5"></i>
+        </button>
+
+        <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-sm">
+          Get Started
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-4 space-y-3">
+      <a href="#features" class="block py-1 hover:text-brand-600">Features</a>
+      <a href="#work" class="block py-1 hover:text-brand-600">Work</a>
+      <a href="#pricing" class="block py-1 hover:text-brand-600">Pricing</a>
+      <a href="#contact" class="block py-1 hover:text-brand-600">Contact</a>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Hi, I'm <span>Ankur & P</span></h1>
-      <p>Welcome to my personal website. I build web applications and digital experiences using clean code and modern web standards.</p>
-      <a href="#contact" class="btn">Get in Touch</a>
-    </section>
+  <!-- ================= HERO ================= -->
+  <section class="relative pt-24 pb-20 overflow-hidden text-center max-w-4xl mx-auto px-6">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-800 mb-6">
+      <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+      Version 2.0 Released
+    </div>
+    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+      Build modern apps <br class="hidden sm:block" />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-400">at lightning speed.</span>
+    </h1>
+    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+      A lightweight, modular, and high-performance framework crafted for digital creators, engineers, and modern product teams.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#pricing" class="px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-medium shadow-md transition-all">
+        Calculate Estimate
+      </a>
+      <a href="#work" class="px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition-all">
+        Explore Portfolio
+      </a>
+    </div>
+  </section>
 
-    <section id="projects">
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="card-tag">Web Development</div>
-          <h3>Modern Web App</h3>
-          <p>A fast, responsive web interface built using semantic HTML5, CSS Grid, and JavaScript.</p>
+  <!-- ================= FEATURES ================= -->
+  <section id="features" class="py-20 bg-slate-100/60 dark:bg-slate-900/40">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <h2 class="text-3xl font-bold tracking-tight">Engineered for Excellence</h2>
+        <p class="text-slate-600 dark:text-slate-400 mt-2">Everything you need to launch and scale your online presence.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition">
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 mb-6">
+            <i data-lucide="zap" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Ultra-Fast Performance</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Built with zero bloatware to achieve top Lighthouse and Core Web Vitals scores instantly.</p>
         </div>
-        <div class="card">
-          <div class="card-tag">Backend / Node</div>
-          <h3>REST API Service</h3>
-          <p>Scalable backend architecture configured with Node.js and modular package management.</p>
+
+        <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition">
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 mb-6">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Bulletproof Security</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Strict adherence to modern web standards, CSRF protection patterns, and semantic markup.</p>
         </div>
-        <div class="card">
-          <div class="card-tag">UI / UX</div>
-          <h3>Interactive Dashboard</h3>
-          <p>Data visualization dashboard designed for maximum readability and speed.</p>
+
+        <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition">
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 mb-6">
+            <i data-lucide="smartphone" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Adaptive UI</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Responsive layouts that look pixel-perfect across phones, tablets, and 4K displays.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact">
-      <div class="contact-box">
-        <h2>Let's Connect</h2>
-        <p>Feel free to reach out for collaborations, project ideas, or any questions.</p>
-        <button class="btn" onclick="alert('Thanks for reaching out! You can update this action in index.html.')">Say Hello 👋</button>
+  <!-- ================= INTERACTIVE PORTFOLIO ================= -->
+  <section id="work" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div>
+          <h2 class="text-3xl font-bold">Selected Works</h2>
+          <p class="text-slate-600 dark:text-slate-400 mt-2">Filter and inspect recent product rollouts.</p>
+        </div>
+        <!-- Filter Tabs -->
+        <div class="flex gap-2 mt-4 md:mt-0 flex-wrap" id="filterTabs">
+          <button data-filter="all" class="filter-btn active px-4 py-1.5 text-sm rounded-full font-medium bg-brand-600 text-white">All</button>
+          <button data-filter="design" class="filter-btn px-4 py-1.5 text-sm rounded-full font-medium bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700">Design</button>
+          <button data-filter="dev" class="filter-btn px-4 py-1.5 text-sm rounded-full font-medium bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700">Development</button>
+          <button data-filter="saas" class="filter-btn px-4 py-1.5 text-sm rounded-full font-medium bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700">SaaS</button>
+        </div>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Ankur Majumder. Built with HTML & npm.</p>
+      <!-- Grid Container -->
+      <div id="portfolioGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cards dynamically controlled by JS below -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE PRICING CALCULATOR ================= -->
+  <section id="pricing" class="py-20 bg-slate-100/60 dark:bg-slate-900/40">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Interactive Project Estimator</h2>
+        <p class="text-slate-600 dark:text-slate-400 mt-2">Configure requirements and receive an instant price estimation.</p>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="space-y-6">
+          <div>
+            <div class="flex justify-between font-medium mb-2">
+              <label for="pageRange">Number of Pages / Views</label>
+              <span id="pageCountDisplay" class="font-bold text-brand-600">5 Pages</span>
+            </div>
+            <input type="range" id="pageRange" min="1" max="20" value="5" class="w-full accent-brand-600 cursor-pointer" />
+          </div>
+
+          <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+            <h4 class="font-medium mb-3">Add-on Modules:</h4>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <input type="checkbox" id="cmsOpt" class="rounded text-brand-600 accent-brand-600 w-4 h-4" />
+                <span class="text-sm">Headless CMS ($300)</span>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <input type="checkbox" id="authOpt" class="rounded text-brand-600 accent-brand-600 w-4 h-4" />
+                <span class="text-sm">User Authentication ($450)</span>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <input type="checkbox" id="payOpt" class="rounded text-brand-600 accent-brand-600 w-4 h-4" />
+                <span class="text-sm">Stripe Payments ($350)</span>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <input type="checkbox" id="seoOpt" class="rounded text-brand-600 accent-brand-600 w-4 h-4" />
+                <span class="text-sm">Advanced SEO Pack ($200)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <span class="text-sm text-slate-500">Estimated Total:</span>
+              <div id="priceDisplay" class="text-4xl font-extrabold text-brand-600 dark:text-brand-400">$950</div>
+            </div>
+            <a href="#contact" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-medium text-center shadow">
+              Lock In This Estimate
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT FORM ================= -->
+  <section id="contact" class="py-20">
+    <div class="max-w-2xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Let's Connect</h2>
+        <p class="text-slate-600 dark:text-slate-400 mt-2">Have a question or project idea? Send us a message.</p>
+      </div>
+
+      <form id="contactForm" class="space-y-4 bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm" novalidate>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="name">Your Name</label>
+          <input type="text" id="name" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 outline-none" />
+          <p id="nameError" class="hidden text-xs text-red-500 mt-1">Please enter your name.</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1" for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="john@example.com" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 outline-none" />
+          <p id="emailError" class="hidden text-xs text-red-500 mt-1">Please enter a valid email address.</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1" for="message">Message</label>
+          <textarea id="message" rows="4" required placeholder="Tell us about your project..." class="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-brand-500 outline-none"></textarea>
+          <p id="messageError" class="hidden text-xs text-red-500 mt-1">Please enter a short message.</p>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-medium transition shadow flex items-center justify-center gap-2">
+          <span>Send Message</span>
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-10 bg-white dark:bg-slate-900 text-sm text-slate-500">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2 font-bold text-slate-800 dark:text-slate-200">
+        <i data-lucide="sparkles" class="w-5 h-5 text-brand-600"></i>
+        <span>ApexStudio</span>
+      </div>
+      <p>&copy; <span id="year"></span> ApexStudio. All rights reserved.</p>
     </div>
   </footer>
 
+  <!-- ================= TOAST NOTIFICATION ================= -->
+  <div id="toast" class="fixed bottom-6 right-6 flex items-center gap-3 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-lg transform translate-y-12 opacity-0 transition-all duration-300 pointer-events-none z-50">
+    <i data-lucide="check-circle" class="w-5 h-5"></i>
+    <span id="toastMsg">Action completed successfully!</span>
+  </div>
+
+  <!-- ================= APP LOGIC ================= -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2. Dark/Light Mode Switcher with localStorage
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        html.classList.add('dark');
+        themeIcon.setAttribute('data-lucide', 'sun');
+      } else {
+        html.classList.remove('dark');
+        themeIcon.setAttribute('data-lucide', 'moon');
+      }
+      lucide.createIcons();
+      localStorage.setItem('apex_theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('apex_theme') || 
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      setTheme(html.classList.contains('dark') ? 'light' : 'dark');
+    });
+
+    // 3. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on anchor click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // 4. Portfolio Filter Data & Rendering
+    const projects = [
+      { id: 1, title: 'Cloud Dashboard', category: 'saas', desc: 'Real-time telemetry and API analytics.' },
+      { id: 2, title: 'Minimalist Branding', category: 'design', desc: 'Full identity design for a fintech firm.' },
+      { id: 3, title: 'E-Commerce Engine', category: 'dev', desc: 'High-volume storefront built with sub-second speeds.' },
+      { id: 4, title: 'Design System', category: 'design', desc: 'Accessible components and Figma libraries.' },
+      { id: 5, title: 'AI Copywriter', category: 'saas', desc: 'LLM orchestration pipeline with streaming answers.' },
+      { id: 6, title: 'Microservices API', category: 'dev', desc: 'Fault-tolerant distributed architecture.' },
+    ];
+
+    const portfolioGrid = document.getElementById('portfolioGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function renderProjects(filter = 'all') {
+      portfolioGrid.innerHTML = '';
+      const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+
+      filtered.forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-brand-500 transition-all';
+        el.innerHTML = `
+          <span class="text-xs uppercase font-semibold text-brand-600 dark:text-brand-400">${p.category}</span>
+          <h3 class="text-lg font-bold mt-1 group-hover:text-brand-600 transition-colors">${p.title}</h3>
+          <p class="text-sm text-slate-500 mt-2">${p.desc}</p>
+        `;
+        portfolioGrid.appendChild(el);
+      });
+    }
+
+    renderProjects();
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.className = 'filter-btn px-4 py-1.5 text-sm rounded-full font-medium bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700';
+        });
+        btn.className = 'filter-btn active px-4 py-1.5 text-sm rounded-full font-medium bg-brand-600 text-white';
+        renderProjects(btn.dataset.filter);
+      });
+    });
+
+    // 5. Interactive Pricing Estimator
+    const pageRange = document.getElementById('pageRange');
+    const pageCountDisplay = document.getElementById('pageCountDisplay');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const checkboxes = [
+      { el: document.getElementById('cmsOpt'), cost: 300 },
+      { el: document.getElementById('authOpt'), cost: 450 },
+      { el: document.getElementById('payOpt'), cost: 350 },
+      { el: document.getElementById('seoOpt'), cost: 200 },
+    ];
+
+    function calculateTotal() {
+      const pages = parseInt(pageRange.value, 10);
+      pageCountDisplay.textContent = `${pages} ${pages === 1 ? 'Page' : 'Pages'}`;
+
+      let basePrice = 200 + (pages * 150);
+      checkboxes.forEach(item => {
+        if (item.el.checked) basePrice += item.cost;
+      });
+
+      priceDisplay.textContent = `$${basePrice.toLocaleString()}`;
+    }
+
+    pageRange.addEventListener('input', calculateTotal);
+    checkboxes.forEach(c => c.el.addEventListener('change', calculateTotal));
+
+    // 6. Contact Form Validation & Toast Notification
+    const contactForm = document.getElementById('contactForm');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+
+    function showToast(msg) {
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
+
+      let isValid = true;
+
+      // Name validation
+      if (!name.value.trim()) {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('nameError').classList.add('hidden');
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email.value.trim())) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('emailError').classList.add('hidden');
+      }
+
+      // Message validation
+      if (!message.value.trim()) {
+        document.getElementById('messageError').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('messageError').classList.add('hidden');
+      }
+
+      if (isValid) {
+        showToast('Thank you! Your message has been received.');
+        contactForm.reset();
+        calculateTotal();
+      }
+    });
+  </script>
 </body>
 </html>
